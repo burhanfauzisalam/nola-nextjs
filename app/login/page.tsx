@@ -2,6 +2,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -11,18 +12,19 @@ const LoginPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
+    Cookies.set("token", "token_string", { expires: 1 / 24 });
+    // setError("");
 
-    try {
-      const response = await axios.post("/api/login", { username, password });
-      if (response.status === 200) {
-        router.push("/");
-      } else {
-        setError("Login failed");
-      }
-    } catch (err) {
-      setError("Login failed");
-    }
+    // try {
+    //   const response = await axios.post("/api/login", { username, password });
+    //   if (response.status === 200) {
+    //     router.push("/");
+    //   } else {
+    //     setError("Login failed");
+    //   }
+    // } catch (err) {
+    //   setError("Login failed");
+    // }
   };
 
   return (
